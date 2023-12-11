@@ -78,7 +78,12 @@ print(Supplementary_Fig_19_C_plot_list[[2]])
 dev.off()
 
 #Export x, y coordinates of ordination plot to spreadsheet format if so wished
-write.table(Supplementary_Fig_19_C_plot_list[[1]], file = "Supplementary_Fig_19_C_ordination_plot_xy_coordinates.tsv", quote = FALSE, sep = "\t", row.names = TRUE)
+xy_table <- Supplementary_Fig_19_C_plot_list[[1]]
+#Rearrange to get a column with sample names
+xy_table$Sample <- rownames(xy_table)
+xy_table <- xy_table[ , c(ncol(xy_table), 1:(ncol(xy_table) - 1))]
+
+write.table(xy_table, file = "Supplementary_Fig_19_C_ordination_plot_xy_coordinates.tsv", quote = FALSE, sep = "\t", row.names = FALSE)
 
 #Or alternatively,
 #write.xlsx(Supplementary_Fig_19_C_plot_list[[1]], file = "Supplementary_Fig_19_C_ordination_plot_xy_coordinates.xlsx", colNames = TRUE, rowNames = TRUE, colWidths = "auto", borders = "all")
@@ -117,7 +122,11 @@ pdf("Supplementary_Fig_19_D.pdf", paper = "a4r")
 dev.off()
 
 #Write stats to table
-write.table(heatmapstats_reordered, file = "Supplementary_Fig_19_D_feature_stats.tsv", quote = FALSE, sep = "\t", row.names = TRUE)
+#Rearrange to get a column with LKT names
+heatmapstats_reordered$LKT <- rownames(heatmapstats_reordered)
+heatmapstats_reordered <- heatmapstats_reordered[ , c(ncol(heatmapstats_reordered), 1:(ncol(heatmapstats_reordered) - 1))]
+
+write.table(heatmapstats_reordered, file = "Supplementary_Fig_19_D_feature_stats.tsv", quote = FALSE, sep = "\t", row.names = FALSE)
 
 #Or alternatively,
 #write.xlsx(heatmapstats_reordered, file = "Supplementary_Fig_19_D_feature_stats.xlsx", colNames = TRUE, rowNames = TRUE, colWidths = "auto", borders = "all")
