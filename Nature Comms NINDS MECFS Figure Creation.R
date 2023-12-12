@@ -542,6 +542,306 @@ fig2d
 ggsave(fig2d, file = "Figure_2D.png", width = 500, height = 700, dpi = 300, units = "px")  
 ggsave(fig2d, file = "Figure_2D.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px")
 
+##### Figure 2 HF #####
+# Analysis only for text, no figure
+
+data <- readxl::read_excel("Figure 2 HF-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+# fig2_HF <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+  # geom_violin() + # creates the boxplot
+  # stat_boxplot(geom = 'errorbar', width = 0.5, coef = NULL) + # adds the error bars
+  # geom_point(shape=19, position=position_jitter(width = 0.1, height = 0.25), size = 1) + # adds the individual data points
+  # geom_dotplot(binaxis='y', stackdir='center', dotsize=0.25) +
+  # theme_classic() + # sets the theme
+  # scale_color_manual(values = c("blue", "red")) + # sets the colors
+  # labs(y = "HF power") + # sets the y-axis label
+  # theme(legend.position = "none", # removes the legend
+  #       axis.title.x = element_blank(), # removes the x-axis label
+  #       axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+  #       axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+  #       axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+#   ggpp::geom_text_npc(aes(npcx = "right", npcy = "top", label = "p = 9.9E-85", size = 10))
+# 
+# fig2_HF
+# 
+# ggsave(fig2_HF, file = "Figure_2_HF.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+# ggsave(fig2_HF, file = "Figure_2_HF.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2 LF #####
+# Analysis only for text, no figure
+
+data <- readxl::read_excel("Figure 2 LF-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+# fig2_LF <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+#   geom_violin() + # creates the boxplot
+#   geom_dotplot(binaxis='y', stackdir='center', dotsize=0.1) +
+#   theme_classic() + # sets the theme
+#   scale_color_manual(values = c("blue", "red")) + # sets the colors
+#   labs(y = "LF power") + # sets the y-axis label
+#   theme(legend.position = "none", # removes the legend
+#         axis.title.x = element_blank(), # removes the x-axis label
+#         axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+#         axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+#         axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+#   ggpp::geom_text_npc(aes(npcx = "right", npcy = "top", label = "p = 9.3E-78", size = 10))
+# 
+# fig2_LF
+# 
+# ggsave(fig2_LF, file = "Figure_2_LF.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+# ggsave(fig2_LF, file = "Figure_2_LF.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2 SD1 #####
+# Analysis only for text, no figure
+
+data <- readxl::read_excel("Figure 2 SD1-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+# fig2_SD1 <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+#   geom_violin() + # creates the boxplot
+#   geom_dotplot(binaxis='y', stackdir='center', dotsize=1) +
+#   theme_classic() + # sets the theme
+#   scale_color_manual(values = c("blue", "red")) + # sets the colors
+#   labs(y = "SD1") + # sets the y-axis label
+#   theme(legend.position = "none", # removes the legend
+#         axis.title.x = element_blank(), # removes the x-axis label
+#         axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+#         axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+#         axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+  # ggpp::geom_text_npc(aes(npcx = "right", npcy = "top", label = "p = 1.1E-12", size = 10))
+# 
+# fig2_SD1
+# 
+# ggsave(fig2_SD1, file = "Figure_2_SD1.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+# ggsave(fig2_SD1, file = "Figure_2_SD1.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2 SD2 #####
+# Analysis only for text, no figure
+
+data <- readxl::read_excel("Figure 2 SD2-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+# fig2_SD2 <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+#   geom_violin() + # creates the boxplot
+#   geom_dotplot(binaxis='y', stackdir='center', dotsize=1) +
+#   theme_classic() + # sets the theme
+#   scale_color_manual(values = c("blue", "red")) + # sets the colors
+#   labs(y = "SD2") + # sets the y-axis label
+#   theme(legend.position = "none", # removes the legend
+#         axis.title.x = element_blank(), # removes the x-axis label
+#         axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+#         axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+#         axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+#   ggpp::geom_text_npc(aes(npcx = "right", npcy = "top", label = "p = 2.1E-05", size = 10))
+# 
+# fig2_SD2
+# 
+# ggsave(fig2_SD1, file = "Figure_2_SD1.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+# ggsave(fig2_SD1, file = "Figure_2_SD1.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2 SD1/SD2 #####
+# Analysis only for text, no figure
+
+data <- readxl::read_excel("Figure 2 SD1-SD2-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+# fig2_SD1SD2 <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+#   geom_violin() + # creates the boxplot
+#   geom_dotplot(binaxis='y', stackdir='center', dotsize=1) +
+#   theme_classic() + # sets the theme
+#   scale_color_manual(values = c("blue", "red")) + # sets the colors
+#   labs(y = "SD1/SD2") + # sets the y-axis label
+#   theme(legend.position = "none", # removes the legend
+#         axis.title.x = element_blank(), # removes the x-axis label
+#         axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+#         axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+#         axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+  # ggpp::geom_text_npc(aes(npcx = "right", npcy = "top", label = "p = 2.1E-05", size = 10))
+# 
+# fig2_SD1SD2
+# 
+# ggsave(fig2_SD1, file = "Figure_2_SD1.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+# ggsave(fig2_SD1, file = "Figure_2_SD1.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2E #####
+
+data <- readxl::read_excel("Figure 2E-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+fig2e <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+  geom_violin() + # creates the boxplot
+  geom_dotplot(binaxis='y', stackdir='center', dotsize=0.25) +
+  theme_classic() + # sets the theme
+  scale_color_manual(values = c("blue", "red")) + # sets the colors
+  labs(y = "lnHF power") + # sets the y-axis label
+  theme(legend.position = "none", # removes the legend
+        axis.title.x = element_blank(), # removes the x-axis label
+        axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+        axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+        axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+  ggpp::geom_text_npc(aes(npcx = "center", npcy = "top", label = "p = 8.2E-127", size = 10))
+
+fig2e
+
+ggsave(fig2e, file = "Figure_2E.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+ggsave(fig2e, file = "Figure_2E.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2F #####
+
+data <- readxl::read_excel("Figure 2F-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "var") # renames the columns in the data frame
+
+fig2f <- ggplot2::ggplot(data, aes(x = group, y = var, color = group)) + # creates the ggplot object
+  geom_violin() + # creates the boxplot
+  geom_dotplot(binaxis='y', stackdir='center', dotsize=0.25) +
+  theme_classic() + # sets the theme
+  scale_color_manual(values = c("blue", "red")) + # sets the colors
+  labs(y = "lnLF power") + # sets the y-axis label
+  theme(legend.position = "none", # removes the legend
+        axis.title.x = element_blank(), # removes the x-axis label
+        axis.title.y = element_text(face = "bold", color = "black", size = 28), # sets the y-axis label
+        axis.text.x = element_text(face = "bold", color = "black", size = 22), # sets the x-axis text
+        axis.text.y = element_text(color = "black", size = 22)) + # sets the y-axis text
+  # ggsignif::geom_signif(test = "wilcox.test", # adds the significance test
+  #                       comparisons = list(c("HV", "PI-ME/CFS")), # sets the comparisons
+  #                       map_signif_level = function(p) sprintf("p = %.1g", p), # sets the significance level
+  #                       color = "black",
+  #                       textsize = 8) + # sets the color of the significance test 
+  ggpp::geom_text_npc(aes(npcx = "center", npcy = "top", label = "p = 1.1E-87", size = 10))
+
+fig2f
+
+ggsave(fig2f, file = "Figure_2F.png", width = 500, height = 700, dpi = 300, units = "px")  # saves the figure as a .png
+ggsave(fig2f, file = "Figure_2F.eps", width = 500, height = 700, dpi = 300, device = "eps", units= "px") # saves the figure as a .eps
+
+
+data <- data %>%
+  dplyr::group_by(group) %>%
+  dplyr::mutate(
+    bin = row_number(),
+    bin = as.factor(bin))
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
+
+##### Figure 2G #####
+# Analysis only, no figure regeneration
+
+data <- readxl::read_excel("Figure 2G-collapsed-group.xlsx", col_names = TRUE) %>% # reads in the .xlsx file
+  janitor::clean_names() %>% # cleans the column names
+  na.omit() # removes any rows with missing data
+
+colnames(data) <- c("group", "bin", "var") # renames the columns in the data frame
+
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group))
+summary(lsmeans::lsmeans(lm(var ~ group + bin, data = data), pairwise ~ group)$contrasts)$p.value
 
 ##### Figure 2H #####
 
