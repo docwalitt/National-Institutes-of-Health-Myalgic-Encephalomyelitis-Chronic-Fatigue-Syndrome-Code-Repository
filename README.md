@@ -18,7 +18,7 @@ To access the source data, please see the following steps below. One option is t
 
 ## Transcriptomics code comes from NHLBI-BCB/COVID-19_Transcriptomics (https://github.com/NHLBI-BCB/COVID-19_Transcriptomics.git)
 
-##### Start Here #####
+## Start here for replication analysis and figure creation using source data where available
 
 Option #1
 
