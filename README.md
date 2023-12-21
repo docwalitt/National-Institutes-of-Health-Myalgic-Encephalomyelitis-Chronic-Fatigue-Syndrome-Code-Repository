@@ -1,4 +1,4 @@
-# Nature_Comms_MECFS
+# Nature Communications - Walitt et al. source code and data
 Source data and code for analysis and figure creation associated with the Walitt et al. Nature Comms paper on MECFS
 
 All of the DNA sequencing data has been deposited to the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) of the National Library of Medicine (NLM) at the [National Institutes of Health (NIH)](https://www.nih.gov/), under BioProject accession number [PRJNA954397](https://www.ncbi.nlm.nih.gov/sra/PRJNA954397).
@@ -15,6 +15,8 @@ This repo contains an R script file that contains the source code to generate th
 This R script calls source data stored in the "Nature Comms MECFS Source Data.RData" object.
 
 To access the source data, please see the following steps below. One option is to extract the individual data files from the RData object and write them as .xlsx files to a directory of your choosing and then read them in as specified for plotting when needed. The second option allows you to extract them all into individual data frames in the current global environment. Doing this will allow the individual data frames to be called but will require a slight code modification for each section to use that instead of reading in a .xlsx with those data.
+
+## Transcriptomics code comes from NHLBI-BCB/COVID-19_Transcriptomics (https://github.com/NHLBI-BCB/COVID-19_Transcriptomics.git)
 
 ##### Start Here #####
 
