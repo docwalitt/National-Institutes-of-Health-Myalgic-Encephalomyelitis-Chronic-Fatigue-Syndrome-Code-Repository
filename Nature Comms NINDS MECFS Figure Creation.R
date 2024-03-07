@@ -31,10 +31,10 @@ setwd("Z:/ME-CFS/Figures/final_figures/Sam - Revisions/Current Versions/Compiled
 #dir.create(output_dir, showWarnings = FALSE) # this creates that directory to save the .xlsx files to
 
 # purrr::walk iterates over the source_data list of data frames and writes each data frame to a separate .xlsx file
-#purrr::walk(names(xlsx_list), ~ openxlsx::write.xlsx(xlsx_list[[.x]], file.path(output_dir, paste0(.x, ".xlsx")), row.names = FALSE))
+#purrr::walk(names(source_data), ~ openxlsx::write.xlsx(source_data[[.x]], file.path(output_dir, paste0(.x, ".xlsx")), row.names = FALSE))
 
 # If you want to just extract all files into separate data frames in the current global environment
-# list2env(xlsx_list, envir = .GlobalEnv)
+# list2env(source_data, envir = .GlobalEnv)
 
 ##### set content so it is loaded for use where relevant
 formula = y ~ x # sets the formula for regression
