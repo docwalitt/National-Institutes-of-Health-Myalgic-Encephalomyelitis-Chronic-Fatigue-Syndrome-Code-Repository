@@ -18,6 +18,26 @@ To access the source data, please see the following steps below. One option is t
 
 ## Transcriptomics code comes from NHLBI-BCB/COVID-19_Transcriptomics (https://github.com/NHLBI-BCB/COVID-19_Transcriptomics.git)
 
+## EEfRT Data and Supporting Materials
+
+The "EEfRT" folder contains the data used to make the statistical models and generate the graphs for the paper. It is included as an excel file and as a tab delimited text file.
+ 
+Additionally, the SAS scripts used to model the dataset and generate our graphs are included. The Hard Task Choice script runs the analysis and creates the graph used for Figure 3a, whereas the Button Press Rate script runs the analysis and creates the graph used for Figure 3b. These scripts are attached as SAS files and as text files. If one has a copy of SAS and the attached dataset, replicating our results should be as simple as importing the dataset into SAS and then running the included scripts.
+ 
+All elements of the scripts and models were constructed closely following the official SAS user’s guide for the PROC GEE procedure (see the attached gee.pdf file) and the UCLA Statistical Methods and Data Analytics seminar on analyzing and visualizing interactions in SAS (which can be found here: https://stats.oarc.ucla.edu/sas/seminars/analyzing-and-visualizing-interactions/). 
+ 
+The first half of both scripts takes the variables in the dataset and retitles them to make their names shorter and more manageable and to make the outputs easier to read and understand. The “Trial” variable is also adjusted to begin at 0 instead of at 1, which by my understanding is best practice, and a copy of the variable is also generated, which is necessary for the GEE procedure.
+ 
+The second half of both scripts controls the construction and testing of the model itself and the creation of the graphs. The only element of these which I believe requires significant extra explanation is the “where” statement, which removes some data from the analysis. This statement does three things:
+ 
+1). Data is only included if the participant is adjudicated AND if their data is valid
+ 
+2). Data from the practice trials (indicated by a negative value for Trial) are dropped
+ 
+3). Trials in which the participant failed to make a choice about trial difficulty within the allotted 5 seconds (thus requiring the computer to make a random choice for the participant) were also excluded from the analysis, since the participant did not actually make their own difficulty choice that trial
+ 
+For the graphs, default settings were used so that they were drawn for the condition in which the model covariates (e.g., reward value, reward probability) are set to their average values. The only place where this was adjusted was for the Sex covariate, since the default behavior for the graph function when working with binary covariates is to create the graphs for only one of the two conditions (i.e., only men or only women). It was specified that the graphs should instead be made for the “average” participant (which is an approximately 6:4 sex ratio).
+
 ## Start here for replication analysis and figure creation using source data where available
 
 Option #1
